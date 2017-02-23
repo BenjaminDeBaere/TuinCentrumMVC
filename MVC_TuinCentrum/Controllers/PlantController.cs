@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_TuinCentrum.Models;
 using System.IO;
+using MVC_TuinCentrum.Filters;
 
 namespace MVC_TuinCentrum.Controllers
 {
+    [StatistiekActionFilter]
     public class PlantController : Controller
     {
         private MVCTuinCentrumEntities db = new MVCTuinCentrumEntities();
@@ -19,7 +21,7 @@ namespace MVC_TuinCentrum.Controllers
         public ActionResult Index()
         {
             var planten = db.Planten.Include(p => p.Leverancier).Include(p => p.Soort);
-            return View(planten.ToList());
+            return View(planten.ToList()); 
         }
 
         // GET: Plant/Details/5
